@@ -37,7 +37,7 @@ const AdminSidebar = () => {
             <ul className="-ml-3 flex list-none flex-col pl-0 text-xs md:min-w-full md:flex-col">
               <MenuItemSidebar
                 label="Join DAO"
-                href="/create"
+                href="/daos"
                 image={<Activity width={16} />}
               />
             </ul>

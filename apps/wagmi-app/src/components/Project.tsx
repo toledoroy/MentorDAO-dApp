@@ -10,7 +10,7 @@ type IProjectProps = {
 
 const Project = ({
   project,
-  setSelectedProject = (id: string) => {},
+  setSelectedProject = (id: string) => console.log(id),
 } : IProjectProps ) => {
   // business logic
   const onProjectClick = () => {

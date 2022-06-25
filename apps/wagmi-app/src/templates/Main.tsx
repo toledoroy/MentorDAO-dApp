@@ -51,26 +51,27 @@ const Main = (props: IMainProps) => (
               </Link>
             </li>
             <li className="mr-6">
+              <Link href="/create/">
+                <a className="border-none text-gray-700 hover:text-gray-900 dark:text-white hover:dark:text-neutral-100">
+                  Start a DAO
+                </a>
+              </Link>
+            </li>
+            <li className="mr-6">
+              <Link href="/daos/">
+                <a className="border-none text-gray-700 hover:text-gray-900 dark:text-white hover:dark:text-neutral-100">
+                  Join a DAO
+                </a>
+              </Link>
+            </li>
+            <li className="mr-6">
               <Link href="/about/">
                 <a className="border-none text-gray-700 hover:text-gray-900 dark:text-white hover:dark:text-neutral-100">
                   About
                 </a>
               </Link>
             </li>
-            <li className="mr-6">
-              <a
-                target={"_blank"}
-                className="border-none text-gray-700 hover:text-gray-900 dark:text-white hover:dark:text-neutral-100"
-                href="https://github.com/turbo-eth"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-            </li>
           </ul>
-        </div>
-        <div className="">
-          © Copyright {new Date().getFullYear()} Kames Geraghty
         </div>
         <ColorMode className="mt-3" />
       </div>

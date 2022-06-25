@@ -18,7 +18,7 @@ export function Admin({ children, meta }: IMainProps) {
           <div className="area-top z-10 flex-none">
             <AdminNavbar />
           </div>
-          <main className="area-main flex-6 basis-4/5s mx-auto w-full grow overflow-auto bg-gray-100 p-10 dark:bg-gray-800 dark:text-white">
+          <main className="area-main flex-6 basis-4/5s mx-auto w-full grow overflow-auto bg-gray-300 p-10 dark:bg-gray-800 dark:text-white">
             {children}
           </main>
         </div>

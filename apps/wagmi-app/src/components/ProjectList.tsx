@@ -7,7 +7,7 @@
   
   const ProjectsList = ({ data } : any) => {
     const [selectedProjectId, setSelectedProject] = useState(null);
-    
+    console.log(selectedProjectId)
     return (
       <>
         <div className='flex'
