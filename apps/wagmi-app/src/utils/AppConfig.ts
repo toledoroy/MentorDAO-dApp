@@ -1,7 +1,7 @@
 export const AppConfig = {
-  site_name: 'Starter',
-  title: 'TurboETH',
+  site_name: 'MentorDAO',
+  title: 'MentorDAO',
   emoji: '⚡',
-  description: 'Ethereum dApp Build System',
+  description: 'Mentor your DAO',
   locale: 'en',
 };

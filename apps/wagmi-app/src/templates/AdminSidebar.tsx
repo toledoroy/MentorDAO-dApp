@@ -24,6 +24,24 @@ const AdminSidebar = () => {
               />
             </ul>
           </nav>
+          <nav>
+            <ul className="-ml-3 flex list-none flex-col pl-0 text-xs md:min-w-full md:flex-col">
+              <MenuItemSidebar
+                label="Start DAO"
+                href="/create"
+                image={<Activity width={16} />}
+              />
+            </ul>
+          </nav>
+          <nav>
+            <ul className="-ml-3 flex list-none flex-col pl-0 text-xs md:min-w-full md:flex-col">
+              <MenuItemSidebar
+                label="Join DAO"
+                href="/create"
+                image={<Activity width={16} />}
+              />
+            </ul>
+          </nav>
         </div>
         <div className="area-bottom">
           <nav>

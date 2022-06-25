@@ -14,7 +14,7 @@ export const ColorMode = ({ className }: ColorModeProps) => {
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
+        window.matchMedia("(prefers-color-scheme: dark)")?.matches)
     ) {
       document.documentElement.classList.add("dark");
       document.documentElement.classList.remove("light");
