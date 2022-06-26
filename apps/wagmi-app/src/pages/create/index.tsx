@@ -62,15 +62,6 @@ const DaoPage = () => {
 
   async function setProject(){
     try {
-        // const web3 = new Web3HttpProvider("https://rpc.valist.io/polygon");
-  
-        // const privateKey = ethers.Wallet.createRandom();
-        // const wallet = new ethers.Wallet(privateKey);
-  
-        // const provider = new ethers.providers.Web3Provider(web3);
-        // const valist = await createValist(provider, { wallet, metaTx: true });
-        // const accountID = valist.generateID(137, 'acme-co');
-        // const projectID = valist.generateID(accountID, 'go-binary')
         setProjectId("projectID")      
     } catch (err) {
       console.log(err)
@@ -80,25 +71,16 @@ const DaoPage = () => {
   console.log(urlArr)
   async function createNewDAO() {   
     /* saves post to ipfs then anchors to smart contract */
-    if (!title || !desc) return
-    //await setProject();
-    const hash = await saveDaoToIpfs()
+    if (!title || !desc || !level) return
     await saveDao('hash')
     await license()
     const response = await offersGetCov(contractAddress)
     console.log("response")
     console.log(response)
-    // router.push(`/`)
   }
 
   async function license(){
     try {
-        // const releaseID = await valist.getLatestReleaseID(projectID)
-    
-        // const projectMeta = await valist.getProjectMeta(projectID);
-        // const latestRelease = await valist.getReleaseMeta(releaseID);
-    
-        // console.log(projectMeta);
         console.log("latestRelease");
     } catch (err) {
       console.log(err)
@@ -122,30 +104,6 @@ const DaoPage = () => {
       }
     }    
   }
-
-
-    // async function saveDaoToIpfs() {
-    //   const provider = new ethers.providers.Web3Provider(window.ethereum)
-    //   const signer = provider.getSigner()
-    //   const dao = {
-    //     title,
-    //     desc,
-    //     level,
-    //     projectID,
-    //   }
-      
-    //   /* save post metadata to ipfs */
-    //   try {
-    //     const added = await client.add(JSON.stringify(dao))
-    //     const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-    //     //const url = "12"
-    //     setUrlArr(prev => [...prev, url]);    
-    //     return added.path
-    //   } catch (err) {
-    //     console.log('error: ', err)
-    //   }
-    // }
-  
 
   return (
     <Admin meta={<Meta title="Start DAO" description="MentorDAO" />}>
