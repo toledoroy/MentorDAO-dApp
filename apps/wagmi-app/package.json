@@ -1,5 +1,5 @@
 {
-  "name": "@turbo-eth/demo-app",
+  "name": "mentordao",
   "version": "0.0.0-beta.0",
   "private": true,
   "scripts": {
@@ -35,7 +35,8 @@
     "react-modal-hook": "^3.0.0",
     "react-select": "^5.3.2",
     "styled-components": "^5.3.5",
-    "wagmi": "0.4.12"
+    "wagmi": "0.4.12",
+    "web3-providers-http": "^1.7.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.3.0",
