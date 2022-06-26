@@ -13,7 +13,7 @@ import {
 import { create } from "ipfs-http-client";
 import { ethers } from 'ethers'
 const createValist = require('@valist/sdk').create;
-import Web3HttpProvider from 'web3-providers-http';
+// import Web3HttpProvider from 'web3-providers-http';
 
 
 const client = create('https://ipfs.infura.io:5001/api/v0');
@@ -27,16 +27,16 @@ const DaoPage = () => {
 
   async function setProject(){
     try {
-        const web3 = new Web3HttpProvider("https://rpc.valist.io/polygon");
+        // const web3 = new Web3HttpProvider("https://rpc.valist.io/polygon");
   
-        const privateKey = ethers.Wallet.createRandom();
-        const wallet = new ethers.Wallet(privateKey);
+        // const privateKey = ethers.Wallet.createRandom();
+        // const wallet = new ethers.Wallet(privateKey);
   
-        const provider = new ethers.providers.Web3Provider(web3);
-        const valist = await createValist(provider, { wallet, metaTx: true });
-        const accountID = valist.generateID(137, 'acme-co');
-        const projectID = valist.generateID(accountID, 'go-binary')
-        setProjectId(projectID)      
+        // const provider = new ethers.providers.Web3Provider(web3);
+        // const valist = await createValist(provider, { wallet, metaTx: true });
+        // const accountID = valist.generateID(137, 'acme-co');
+        // const projectID = valist.generateID(accountID, 'go-binary')
+        setProjectId("projectID")      
     } catch (err) {
       console.log(err)
     }
