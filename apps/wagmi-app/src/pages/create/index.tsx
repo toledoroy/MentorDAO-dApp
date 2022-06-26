@@ -16,7 +16,7 @@ import abi from '../../../../../contracts/abi/dao.json'
 // const createValist = require('@valist/sdk').create;
 // import Web3HttpProvider from 'web3-providers-http';
 
-
+// @ts-ignore
 const client:any = create('https://ipfs.infura.io:5001/api/v0');
 
 const DaoPage = () => {
@@ -24,7 +24,7 @@ const DaoPage = () => {
   const [desc, setDesc] = useState('')
   const [level, setLevel] = useState('')
   const [urlArr, setUrlArr] = useState([]);
-  const [projectID, setProjectId] = useState("")
+  const [projectID, setProjectId] = useState("123")
   const [isLoading, setIsLoading] = useState(false)
   const [nfts, setNFTs] = useState(false)
   const contractAddress = '0x402D30e7Dba9BE455203A9d02bAB122bc5F59549';
@@ -87,7 +87,7 @@ const DaoPage = () => {
   async function createNewDAO() {   
     /* saves post to ipfs then anchors to smart contract */
     if (!title || !desc) return
-    await setProject();
+    //await setProject();
     const hash = await saveDaoToIpfs()
     await saveDao(hash)
     await license()
@@ -97,15 +97,15 @@ const DaoPage = () => {
     // router.push(`/`)
   }
 
-  async function license(projectID){
+  async function license(){
     try {
-        const releaseID = await valist.getLatestReleaseID(projectID)
+        // const releaseID = await valist.getLatestReleaseID(projectID)
     
-        const projectMeta = await valist.getProjectMeta(projectID);
-        const latestRelease = await valist.getReleaseMeta(releaseID);
+        // const projectMeta = await valist.getProjectMeta(projectID);
+        // const latestRelease = await valist.getReleaseMeta(releaseID);
     
-        console.log(projectMeta);
-        console.log(latestRelease);
+        // console.log(projectMeta);
+        console.log("latestRelease");
     } catch (err) {
       console.log(err)
     }
@@ -119,7 +119,7 @@ const DaoPage = () => {
       const contract = new ethers.Contract(contractAddress, abi, signer)
       console.log('contract: ', contract)
       try {
-        const val = await contract.createDao(title, hash)
+        const val = await contract.create(title, hash)
         /* optional - wait for transaction to be confirmed before rerouting */
         /* await provider.waitForTransaction(val.hash) */
         console.log('val: ', val)
