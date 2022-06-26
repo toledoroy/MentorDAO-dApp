@@ -12,11 +12,12 @@ import {
 } from '@chakra-ui/react'
 import { create } from "ipfs-http-client";
 import { ethers } from 'ethers'
+import abi from '../../../../../contracts/abi/dao.json'
 // const createValist = require('@valist/sdk').create;
 // import Web3HttpProvider from 'web3-providers-http';
 
 
-const client = create('https://ipfs.infura.io:5001/api/v0');
+const client:any = create('https://ipfs.infura.io:5001/api/v0');
 
 const DaoPage = () => {
   const [title, setTitle] = useState('')
@@ -26,39 +27,7 @@ const DaoPage = () => {
   const [projectID, setProjectId] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [nfts, setNFTs] = useState(false)
-/**
-   * Fetch NFTs via COVALENT NFT API
-   *    - No Support for Mumbai...
-   */
-  async function offersGetNFTPort() {
-    const contractHash = "0x402D30e7Dba9BE455203A9d02bAB122bc5F59549"; //Something on Polygon
-    //Polygon Offers
-    fetch(
-      "https://api.nftport.xyz/v0/nfts/" +
-      contractHash +
-      "?chain=polygon&include=metadata",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "6d4b6109-76f0-4253-b095-a98f441a7359", //Test Key
-        },
-      },
-    )
-      .then((response) => {
-        console.warn("[TEST] Contract's NFTs:", response);
-        response?.nfts ? setNFTs(response.nfts) : setNFTs([]);
-        //Done Loading
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        //Done Loading
-        setIsLoading(false);
-        //Has Error
-        setError(err);
-      });
-  }
+  const contractAddress = '0x402D30e7Dba9BE455203A9d02bAB122bc5F59549';
 
 
   /**
@@ -122,7 +91,10 @@ const DaoPage = () => {
     const hash = await saveDaoToIpfs()
     await saveDao(hash)
     await license()
-    router.push(`/`)
+    const response = await offersGetCov(contractAddress)
+    console.log("response")
+    console.log(response)
+    // router.push(`/`)
   }
 
   async function license(projectID){
@@ -144,8 +116,7 @@ const DaoPage = () => {
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      const contractAddress = '0x402D30e7Dba9BE455203A9d02bAB122bc5F59549';
-      const contract = new ethers.Contract(contractAddress, 'abi', signer)
+      const contract = new ethers.Contract(contractAddress, abi, signer)
       console.log('contract: ', contract)
       try {
         const val = await contract.createDao(title, hash)
