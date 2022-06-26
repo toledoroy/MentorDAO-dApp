@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Admin } from "@/templates/Admin";
 import { Meta } from "@/templates/Meta";
 import ProjectsList from '@/components/ProjectList';
