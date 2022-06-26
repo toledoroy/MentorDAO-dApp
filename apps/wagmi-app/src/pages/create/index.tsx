@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { create } from "ipfs-http-client";
 import { ethers } from 'ethers'
-const createValist = require('@valist/sdk').create;
+// const createValist = require('@valist/sdk').create;
 // import Web3HttpProvider from 'web3-providers-http';
 
 
@@ -24,6 +24,78 @@ const DaoPage = () => {
   const [level, setLevel] = useState('')
   const [urlArr, setUrlArr] = useState([]);
   const [projectID, setProjectId] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [nfts, setNFTs] = useState(false)
+/**
+   * Fetch NFTs via COVALENT NFT API
+   *    - No Support for Mumbai...
+   */
+  async function offersGetNFTPort() {
+    const contractHash = "0x402D30e7Dba9BE455203A9d02bAB122bc5F59549"; //Something on Polygon
+    //Polygon Offers
+    fetch(
+      "https://api.nftport.xyz/v0/nfts/" +
+      contractHash +
+      "?chain=polygon&include=metadata",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "6d4b6109-76f0-4253-b095-a98f441a7359", //Test Key
+        },
+      },
+    )
+      .then((response) => {
+        console.warn("[TEST] Contract's NFTs:", response);
+        response?.nfts ? setNFTs(response.nfts) : setNFTs([]);
+        //Done Loading
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        //Done Loading
+        setIsLoading(false);
+        //Has Error
+        setError(err);
+      });
+  }
+
+
+  /**
+   * Fetch NFTs via COVALENT NFT API
+   * https://www.covalenthq.com/docs/api/#/0/Class-A/Get-changes-in-token-holders-between-two-block-heights/lng=en
+   */
+  async function offersGetCov(contractHash) {
+    // const chain = '137'; //Polygon
+    // const chain = '80001'; //Mumbai
+    // let res = await
+    fetch(
+      `https://api.covalenthq.com/v1/137/tokens/${contractHash}/nft_token_ids/?key=ckey_3cf63e4335e74f97a35b9f16bb1`,
+      // `https://api.covalenthq.com/v1/80001/tokens/${contractHash}/nft_token_ids/?key=ckey_3cf63e4335e74f97a35b9f16bb1`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        console.warn("[TEST] covalenthq Contract's NFTs:", response?.data?.items);
+        response?.data?.items ? setNFTs(response?.data?.items) : setNFTs([]);
+        //Done Loading
+        setIsLoading(false);
+        return response;
+      })
+      .catch((err) => {
+        console.error(err);
+        //Done Loading
+        setIsLoading(false);
+        //Has Error
+        setError(err);
+      });
+    // console.warn("[TEST] covalenthq Contract's NFTs:", res);
+  }
 
   async function setProject(){
     try {
@@ -72,7 +144,7 @@ const DaoPage = () => {
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      const contractAddress = 'address';
+      const contractAddress = '0x402D30e7Dba9BE455203A9d02bAB122bc5F59549';
       const contract = new ethers.Contract(contractAddress, 'abi', signer)
       console.log('contract: ', contract)
       try {
