@@ -10,14 +10,8 @@ import {
   Select,
   Textarea,
 } from '@chakra-ui/react'
-// import { create } from "ipfs-http-client";
 import { ethers } from 'ethers'
-import abi from '../../../../../contracts/abi/dao.json'
-// const createValist = require('@valist/sdk').create;
-// import Web3HttpProvider from 'web3-providers-http';
-
-// @ts-ignore
-// const client:any = create('https://ipfs.infura.io:5001/api/v0');
+import abiHub from '../../../../../contracts/abi/hub.json'
 
 const DaoPage = () => {
   const [title, setTitle] = useState('')
@@ -89,7 +83,7 @@ const DaoPage = () => {
     if (!title || !desc) return
     //await setProject();
     const hash = await saveDaoToIpfs()
-    await saveDao(hash)
+    await saveDao('hash')
     await license()
     const response = await offersGetCov(contractAddress)
     console.log("response")
@@ -116,10 +110,10 @@ const DaoPage = () => {
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      const contract = new ethers.Contract(contractAddress, abi, signer)
+      const contract = new ethers.Contract(contractAddress, abiHub, signer)
       console.log('contract: ', contract)
       try {
-        const val = await contract.deploy(title, hash)
+        const val = await contract.teamDAOMake(title, hash)
         /* optional - wait for transaction to be confirmed before rerouting */
         /* await provider.waitForTransaction(val.hash) */
         console.log('val: ', val)
@@ -130,27 +124,27 @@ const DaoPage = () => {
   }
 
 
-    async function saveDaoToIpfs() {
-      // const provider = new ethers.providers.Web3Provider(window.ethereum)
-      // const signer = provider.getSigner()
-      // const dao = {
-      //   title,
-      //   desc,
-      //   level,
-      //   projectID,
-      // }
+    // async function saveDaoToIpfs() {
+    //   const provider = new ethers.providers.Web3Provider(window.ethereum)
+    //   const signer = provider.getSigner()
+    //   const dao = {
+    //     title,
+    //     desc,
+    //     level,
+    //     projectID,
+    //   }
       
-      /* save post metadata to ipfs */
-      try {
-        //const added = await client.add(JSON.stringify(dao))
-        //const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-        const url = "12"
-        setUrlArr(prev => [...prev, url]);    
-        return 'added.path'
-      } catch (err) {
-        console.log('error: ', err)
-      }
-    }
+    //   /* save post metadata to ipfs */
+    //   try {
+    //     const added = await client.add(JSON.stringify(dao))
+    //     const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+    //     //const url = "12"
+    //     setUrlArr(prev => [...prev, url]);    
+    //     return added.path
+    //   } catch (err) {
+    //     console.log('error: ', err)
+    //   }
+    // }
   
 
   return (

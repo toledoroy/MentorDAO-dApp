@@ -1,5 +1,5 @@
 {
-  "name": "mentordao",
+  "name": "@turbo-eth/demo-app",
   "version": "0.0.0-beta.0",
   "private": true,
   "scripts": {
