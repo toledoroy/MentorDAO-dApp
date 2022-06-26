@@ -114,7 +114,7 @@ const DaoPage = () => {
 
   return (
     <Admin meta={<Meta title="Start DAO" description="MentorDAO" />}>
-      <h3 className="text-2xl font-bold">Start a DAO</h3>
+      <h3 className="text-2xl font-bold">Start a micro DAO</h3>
       <hr className="my-6 opacity-80" />
       <FormControl>
         <FormLabel htmlFor='title'>Title</FormLabel>
