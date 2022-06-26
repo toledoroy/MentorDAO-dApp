@@ -10,14 +10,14 @@ import {
   Select,
   Textarea,
 } from '@chakra-ui/react'
-import { create } from "ipfs-http-client";
+// import { create } from "ipfs-http-client";
 import { ethers } from 'ethers'
 import abi from '../../../../../contracts/abi/dao.json'
 // const createValist = require('@valist/sdk').create;
 // import Web3HttpProvider from 'web3-providers-http';
 
 // @ts-ignore
-const client:any = create('https://ipfs.infura.io:5001/api/v0');
+// const client:any = create('https://ipfs.infura.io:5001/api/v0');
 
 const DaoPage = () => {
   const [title, setTitle] = useState('')
@@ -119,7 +119,7 @@ const DaoPage = () => {
       const contract = new ethers.Contract(contractAddress, abi, signer)
       console.log('contract: ', contract)
       try {
-        const val = await contract.create(title, hash)
+        const val = await contract.deploy(title, hash)
         /* optional - wait for transaction to be confirmed before rerouting */
         /* await provider.waitForTransaction(val.hash) */
         console.log('val: ', val)
@@ -131,22 +131,22 @@ const DaoPage = () => {
 
 
     async function saveDaoToIpfs() {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const signer = provider.getSigner()
-      const dao = {
-        title,
-        desc,
-        level,
-        projectID,
-      }
+      // const provider = new ethers.providers.Web3Provider(window.ethereum)
+      // const signer = provider.getSigner()
+      // const dao = {
+      //   title,
+      //   desc,
+      //   level,
+      //   projectID,
+      // }
       
       /* save post metadata to ipfs */
       try {
-        const added = await client.add(JSON.stringify(dao))
-        const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-
+        //const added = await client.add(JSON.stringify(dao))
+        //const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+        const url = "12"
         setUrlArr(prev => [...prev, url]);    
-        return added.path
+        return 'added.path'
       } catch (err) {
         console.log('error: ', err)
       }
