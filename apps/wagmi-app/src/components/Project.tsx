@@ -1,5 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
+import logo from './mentor.png'
+import Image from 'next/image'
 
 const styleProject = classnames('w-54 my-2 mx-2 px-2 py-2 bg-white');
 
@@ -19,9 +21,13 @@ const Project = ({
   };
 
   return (
-    <div style={{ width: 250, height: 300 }} className={styleProject}>
-      <h2>{project.name}</h2>
-      <div onClick={() => onProjectClick()}>{project.level}</div>
+    <div style={{ width: 250, height: 400 }} className={styleProject}>
+      <h1 className="text-lg">{project.name}</h1>
+      <Image src={logo} />
+      <div onClick={() => onProjectClick()}>Level: {project.level}</div>
+      <div>Members: 3</div>
+      <div>Status: in progress</div>
+      <button className="btn-indigo btn-sm py- px-2">Join</button>
     </div>
   );
 };

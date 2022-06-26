@@ -1,3 +1,5 @@
+import React from "react";
+import { useState } from "react";
 import { Admin } from "@/templates/Admin";
 import { Meta } from "@/templates/Meta";
 import ProjectsList from '@/components/ProjectList';
@@ -18,13 +20,28 @@ const data = [
     id: '3334',
     level: 'pro'
   }
-]
-const AdminPage = () => (
-  <Admin meta={<Meta title="Admin" description="MentorDAO Admin" />}>
-    <h3 className="text-2xl font-bold">Dashboard</h3>
-    <hr className="my-6 opacity-50" />
-    <ProjectsList data={data} />
-  </Admin>
-);
+];
+
+const retrieveFile = (e) => {
+  const data = e.target.files[0];
+  const reader = new window.FileReader();
+  reader.readAsArrayBuffer(data);
+  reader.onloadend = () => {
+    console.log("Buffer data: ", Buffer(reader.result));
+  }
+
+  e.preventDefault();  
+}
+
+const AdminPage = () => {
+  const [file, setFile] = useState(null);
+
+  return (
+    <Admin meta={<Meta title="Admin" description="MentorDAO Admin" />}>
+      <h3 className="text-2xl font-bold">Your DAOs</h3>
+      <hr className="my-6 opacity-50" />
+      <ProjectsList data={data} />
+    </Admin>
+)};
 
 export default AdminPage;
